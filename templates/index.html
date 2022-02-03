@@ -4,51 +4,38 @@
 
 <table class="table table-bordered">
     <thead>
-
-                        <tr>
-                            <th>№</th>
-                            <th>Название</th>
-                            <th>Артикул</th>
-                            {% for row in rows %}
-                            {% for el in row if loop.first %}
-                            <th>{{ 'ZNP-' + el.znp }}</th>
-
-                            {% endfor %}
-                            {% endfor %}
-                        </tr>
-                    </thead>
+	<tr>
+	    <th>№</th>
+	    <th>Название</th>
+	    <th>Артикул</th>
+	    {% for row in rows %}
+	    	{% for el in row if loop.first %}
+	    		<th>{{ 'ZNP-' + el.znp }}</th>
+	    	{% endfor %}
+	    {% endfor %}
+	</tr>
+    </thead>
 
 {% for row in rows %}
-
         <tr>
-
             <td> {{ loop.index }}</td>
-
             {% for el in row %}
                 {% if loop.first %}
-                    {% set article = el.article %}
-                    <td><a href="{{ info[article].link }}"><small>{{ info[article].name }}</small></a></td>
-                    <td title="{{ info[article].name }}">{{ el.article }}</td>
+			{% set article = el.article %}
+		    	<td><a href="{{ info[article].link }}"><small>{{ info[article].name }}</small></a></td>
+		    	<td title="{{ info[article].name }}">{{ el.article }}</td>
                 {% endif %}
 
                 {% if el.count == 'НЕТ' %}
-            <td ><div class="bg-warning">{{ el.count }}</div></td>
+			<td ><div class="bg-warning">{{ el.count }}</div></td>
                 {% else %}
-                <td>{{ el.count }}</td>
+                	<td>{{ el.count }}</td>
                 {% endif %}
 
             {% endfor %}
-		</tr>
-
-
+	</tr>
 {% endfor %}
 
-
 </table>
-
-
-
-
-
 
 {% endblock %}
